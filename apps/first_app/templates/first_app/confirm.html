@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Full Stack Books</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type = "text/css" href="{% static 'books/style.css' %}"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Are you sure you want to delete the following course?</h1>
+        Name: {{name}}<br>
+        Description: {{description}}<br>
+        <form action="/">
+        <input type="submit" value="No">
+        </form>
+        <form action='/remove/{{id}}' method="post">
+              {% csrf_token %}
+        <input type="submit" value="Yes! I want to delete this">
+        </form>
+</body>

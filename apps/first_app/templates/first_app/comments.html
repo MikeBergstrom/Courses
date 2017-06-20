@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Full Stack Books</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type = "text/css" href="{% static 'books/style.css' %}"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    Course Name: {{name}}<br>
+    Description: {{description}}<br>
+    Comments: <br>
+    <div>
+    {% for comment in comments %}
+        {% if comment.course_id == id %}
+            <p>{{comment.comment}}</p>
+        {% endif %}
+    {% endfor %}
+    </div>
+<h3>Add Comment:</h3>
+<form action="/addcomment/{{id}}" method="post">
+{% csrf_token %}
+<textarea name="comment" rows="5" col="150"></textarea>
+<input type="submit" value="Add Comment">
+</form>
+</body>

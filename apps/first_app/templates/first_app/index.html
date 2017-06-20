@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Full Stack Books</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type = "text/css" href="{% static 'books/style.css' %}"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <h2>Add a new course</h2>
+    <form action="newcourse" method="post">
+        {% csrf_token %}
+        <label>Name:</label>
+        <input type="text" name="name"><br>
+        <label>Description</label><br>
+        <textarea rows="5" columns="75" name="description"></textarea>
+        <input type="submit" value="Add">
+    </form>
+    <table>
+        <tr>
+            <th>Course Name</th>
+            <th>Description</th>
+            <th>Date Added</th>
+            <th>Actions</th>
+        </tr>
+        {% for course in courses %}
+        <tr>
+            <td>{{course.name}}</td>
+            {% for description in description %}
+                {% if description.course_id == course.id %}
+                <td>{{description.description}}</td>
+                {% endif %}
+            {% endfor %}
+            <td>{{course.created_at}}</td>
+            <td><a href="http://localhost:8000/comments/{{course.id}}">comments</a></td>
+            <td><a href="http://localhost:8000/confirm/{{course.id}}">remove</a></td>
+        </tr>
+        {% endfor %}
+</body>
