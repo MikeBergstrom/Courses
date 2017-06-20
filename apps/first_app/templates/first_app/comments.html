@@ -14,7 +14,7 @@
     Comments: <br>
     <div>
     {% for comment in comments %}
-        {% if comment.course_id == id %}
+        {% if comment.course_id == course_id %}
             <p>{{comment.comment}}</p>
         {% endif %}
     {% endfor %}

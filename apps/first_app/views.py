@@ -44,9 +44,9 @@ def comments(request, id):
         'name':course.name,
         'description':course.description,
         'id':id,
-        'comments':comments
+        'comments':comments,
+        'course_id': course.id
     }
-    print comments[0].comment
     print id
     return render(request, 'first_app/comments.html', context)
 
@@ -54,11 +54,10 @@ def addcomment(request, id):
     Comment.objects.create(comment=request.POST['comment'], course_id=id)
     course = Courses.objects.get(id=id)
     comments = Comment.objects.filter(course_id=id)
-    print comments[0].course_id
     context = {
         'name':course.name,
         'description':course.description,
-        'id':id,
+        'course_id':course.id,
         'comments':comments
     }
     return render(request, 'first_app/comments.html', context)
